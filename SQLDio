@@ -1,0 +1,33 @@
+create database ecommerce;
+
+use ecommerce;
+
+create table client(
+    idClient int auto_increment primary key,
+    nome varchar(10),
+    minit char(3),
+    Lname varchar(20),
+    CPF char(11) not null,
+    Address varchar(30),
+    constraint unique_cpf_client unique (CPF)
+);
+
+create table produto(
+    idProduct varchar(10) auto_increment primary key,
+    Pnome varchar(30),
+    classification_kids boolean default false,
+    category enum('Eletronico', 'Vestimenta', 'Brinquedos', 'Alimentos') not null,
+    avaliacao float default 0,
+    size varchar(30),
+    constraint unique_cpf_client unique (CPF)
+);
+
+
+create table pedido(
+    idOrder int auto_increment primary key,
+    idOrderClient int,
+    orderStatus enum('Cancelado', 'Confirmado', 'Em processamento', 'Em Transporte', 'Entregue') not null,
+    orderDescription varchar(255)
+    sendValue float default 10,
+    constraint fk_orders_client foreign key (idOrderClient) references (idClient)
+); 
